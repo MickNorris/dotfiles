@@ -27,12 +27,20 @@ set $mod Mod4
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+
+font pango: Inconsolata 0px
+
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec rxvt-unicode
 bindsym $mod+Shift+Return exec rxvt-unicode -name floating
+
+
+#floating_minimum_size 800 x 500
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -45,7 +53,8 @@ bindsym $mod+Shift+q kill
 
 
 bindsym $mod+d exec rofi -show run -no-show-match -config ~/.config/rofi/dark 
-bindsym $mod+Shift+d exec rofi -show window -no-show-match -config ~/.config/rofi/dark
+bindsym $mod+s exec echo "" | rofi -dmenu -p "search" -config ~/.config/rofi/dark-search | xargs -I{} surf https://www.duckduckgo.com/?q={} 
+# bindsym $mod+Shift+d exec rofi -show window -no-show-match -config ~/.config/rofi/dark
 
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -54,10 +63,10 @@ bindsym $mod+Shift+d exec rofi -show window -no-show-match -config ~/.config/rof
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -66,19 +75,19 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+j move left 30 px 
+bindsym $mod+Shift+k move down 30px
+bindsym $mod+Shift+l move up 30 px
+bindsym $mod+Shift+semicolon move right 30 px
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left 30 px
+bindsym $mod+Shift+Down move down 30 px
+bindsym $mod+Shift+Up move up 30px
+bindsym $mod+Shift+Right move right 30 px
 
 # split in horizontal orientation
-bindsym $mod+h split h
+#bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -87,7 +96,7 @@ bindsym $mod+v split v
 bindsym $mod+g fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -98,25 +107,29 @@ bindsym $mod+Shift+w floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-#bindsym $mod+a focus parent
+bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
 
-exec --no-startup-id compton 
-exec --no-startup-id tint2
+# change monitor focus
+bindsym $mod+Control+Left focus output left
+bindsym $mod+Control+Right focus output right
+
+exec --no-startup-id compton --config ~/.config/compton/compton.conf 
+exec tint2
 
 #Workspace Names
-set $workspace1 "1"
-set $workspace2 "2"
-set $workspace3 "3"
+set $workspace1 ""
+set $workspace2 ""
+set $workspace3 ""
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
-set $workspace7 "Wunderlist"
-set $workspace8 "Discord"
-set $workspace9 "Thunderbird"
-set $workspace0 "Spotify"
+set $workspace7 "7"
+set $workspace8 ""
+set $workspace9 "9"
+set $workspace0 "0"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1 
@@ -131,29 +144,33 @@ bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+1 move container to workspace $workspace1 
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace $workspace7 
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to wokrspace $workspace0 
+bindsym $mod+Shift+0 move container to workspace $workspace0 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Ctrl+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# run firefox/run private firefox
+# run firefox
 bindsym $mod+f exec firefox
-bindsym $mod+Shift+f exec firefox -private-window
+
+# run firefox & search
+bindsym $mod+Shift+f exec firefox --new-tab "testing"
+
+# change screen config 
+bindsym $mod+Ctrl+f exec switch.py 
 
 # record gif
-bindsym Shift+Print exec urxvt -name floating -e screc -gr  
 
 set $resize 100 
 # resize window (you can also use the mouse for that)
@@ -164,21 +181,30 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 15 px or 15 ppt
+        bindsym j resize grow height 15 px or 15 ppt
+        bindsym k resize shrink height 15 px or 15 ppt
+        bindsym l resize grow width 15 px or 15 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 15 px or 15 ppt
+        bindsym Down resize grow height 15 px or 15 ppt
+        bindsym Up resize shrink height 15 px or 15 ppt
+        bindsym Right resize grow width 15 px or 15 ppt
 
-	bindsym Shift+Left resize shrink width $resizepx or $resizeppt
-	bindsym Shift+Down resize grow height $resizepx or $resizeppt
-	bindsym Shift+Up resize shrink height $resizepx or $resizeppt
-	bindsym Shift+Right resize grow width $resizepx or $resizeppt
+        bindsym Shift+Left resize shrink width $resizepx or $resizeppt
+        bindsym Shift+Down resize grow height $resizepx or $resizeppt
+        bindsym Shift+Up resize shrink height $resizepx or $resizeppt
+        bindsym Shift+Right resize grow width $resizepx or $resizeppt
+
+        bindsym minus resize shrink width 125 px; move right 64 px; resize shrink height 125 px; move down 64 px;
+        bindsym equal resize grow width 125 px; move left 64 px; resize grow height 125 px; move up 64 px;
+
+
+        #bindsym Shift+minus resize shrink width 90 px; move right 45 px
+        bindsym Shift+equal resize shrink height 90px; move down 45 px
+
+
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -240,34 +266,27 @@ mode  "$mode_command" {
 
 
 
+# Open Ranger
+bindsym $mod+Shift+r exec rxvt-unicode -name floating -e ranger
 
-
-
-#Volume Control
+# Volume Control
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-bindsym $mod+Shift+m exec amixer set Master toggle
+bindsym XF86AudioMute exec amixer set Master 0% 
 
 
-#Backlight
-bindsym XF86MonBrightnessDown exec xbacklight -dec 15
-bindsym XF86MonBrightnessUp exec xbacklight -inc 15
+# Backlight
+bindsym XF86MonBrightnessDown exec xcalib -a -co 85 
+bindsym XF86MonBrightnessUp exec xcalib -c
 
 bindsym XF86Mail exec opera https://mail.google.com/mail/u/0/#inbox
 bindsym XF86Search exec echo "" | rofi -dmenu -p "Search:"  -config ~/.config/rofi | xargs -I{} xdg-open https://www.google.com/search?q={} 
 
-#Spotify Control
-bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause  
-
-bindsym $mod+p exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-
-bindsym $mod+"plus" exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-
-bindsym $mod+"minus" exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous 
-
-#Second monitor biz
-#exec ~/scripts/second_monitor/second_monitor.sh
-exec xrandr --output HDMI-0 --mode 1680x1050 --left-of DP-0
+# Spotify Control
+bindsym XF86AudioPlay exec playerctl --player=spotify play-pause 
+bindsym XF86AudioPause exec playerctl --player=spotify play-pause 
+bindsym XF86AudioNext exec playerctl --player=spotify next 
+bindsym XF86AudioPrev exec playerctl --player=spotify previous
 
 
 
@@ -286,15 +305,16 @@ bindsym $mod+c exec rxvt-unicode -e vim ~/.config/i3/config
 #for_window [class="(?i)XTerm"] floating enable
 #for_window [class="(?i)Gnome-terminal"] floating enabled
 for_window [instance="floating"] floating enable 
-
+for_window [class="(?i)surf"] floating enable
+## for_window [class="feh"] floating enable
 
 # window colors
 #                       border             background         text                 indicator
-client.focused          #ffffff            #ffffff            #828282              #ffffff
-client.unfocused        #000000            #000000            #666666              #000000
-client.focused_inactive #000000            #000000            #828282              #000000
-client.urgent           $urgent-bg-color   #000000            #828282              #ffffff
-client.placeholder      #000000            #000000            #828282              #535656
+client.focused          #3949ab            #e0e0e0            #ffffff              #3949ab
+client.unfocused        #283272            #283272            #7c8cea              #7c8cea
+client.focused_inactive #283272            #283272            #7c8cea              #7c8cea
+client.urgent           #dbdbdb            #ffffff            #ffffff              #ffffff
+client.placeholder      #dbdbdb            #ffffff            #ffffff              #ffffff
 
 set $bar_bg #1c1c1c 
 
@@ -326,16 +346,23 @@ set $bar_bg #1c1c1c
 
 
 #Screenshot
-bindsym --release Print exec xfce4-screenshooter -c -r  
-
+bindsym --release Print exec xfce4-screenshooter -c -r 
 #Wallpaper
-exec feh --bg-fill ~/Pictures/wallpaper.jpg
+exec feh --bg-fill ~/Pictures/wallpaper2.jpg
+
+exec  nm-applet
+exec xfce4-clipman
+exec --no-startup-id ~/Documents/xflux  -z 22801
+
+
+
+
 
 
 ### i3-gaps stuff ###
 
 # Necessary for i3-gaps to work properly (pixel can be any value)
-for_window [class="^.*"] border pixel 2 
+for_window [class="^.*"] border pixel 1 
 
 # Smart Gaps
 #smart_gaps on 
@@ -343,9 +370,7 @@ for_window [class="^.*"] border pixel 2
 # Smart Borders
 smart_borders on
 
-# Some color adjustments
-client.focused_inactive #000000 #000000 #000000 #000000 #000000
-client.unfocused        #000000 #000000 #000000 #000000 #000000
+
 
 # Set inner/outer gaps
 gaps inner 9 

@@ -1,5 +1,5 @@
 *.foreground: #F8F8F2
-*.background: #282A36
+*.background: #353231 
 *.color0:     #000000
 *.color8:     #4D4D4D
 *.color1:     #FF5555
@@ -17,6 +17,25 @@
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
 
+
+URxvt.perl-ext-common:....,font-size
+
+# URxvt*lineSpace:10 
+# Urxvt*letterSpace: 10
+URxvt*cursorUnderline: true
+
 URxvt*scrollBar: false
-URxvt*fading: 30
-URxvt*internalBorder: 10 
+URxvt*fading: 20
+URxvt*internalBorder: 12 
+Urxvt*depth: 32
+Urxvt*background: rgba:0000/0000/0200/c800
+
+Rxvt*font:			-*-clean-medium-r-*--13-*-*-*-*-*-*-*
+Rxvt*font:			xft:inconsolata-10.5
+
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
