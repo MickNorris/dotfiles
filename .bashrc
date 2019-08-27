@@ -8,7 +8,15 @@ case $- in
       *) return;;
 esac
 
+# set path
+if [ "`id -u`" -eq 0 ]; then
+  PATH="/home/nick/opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+else
+  PATH="/home/nick/opt/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+fi
+export PATH
 
+xrdb /home/nick/.Xresources
 
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -80,7 +88,7 @@ source /usr/share/fonts/i_material.sh
 
 # terminal prompt
 # PS1="\033[1m\e[0;36m[\w\a] \e[m\033[0m"
-PS1='$(tput bold)\033[36m$i_mdi_desktop_classic  \w \033[0m\$  '
+PS1='\[$(tput bold)\033[36m$i_mdi_crown  \w \[\033\]\][0m\$  '
 
 
 
@@ -100,13 +108,13 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# aliases
-alias ll='ls -l'
+# aliases in ~/.bash_aliases
+# alias ll='ls -l'
 #alias la='ls -A'
 #alias l='ls -CF'
-alias ls='lsd'
-alias xup="xrdb ~/.Xresources" 
-alias grep='grep --color=auto' 
+# alias ls='lsd'
+# alias xup="xrdb ~/.Xresources" 
+# alias grep='grep --color=auto' 
 
 
 # Alias definitions.

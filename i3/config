@@ -28,7 +28,7 @@ set $mod Mod4
 # font, it doesn’t scale on retina/hidpi displays.
 
 
-font pango: Inconsolata 0px
+font pango: Inconsolata Nerd Font 0px
 
 
 
@@ -36,8 +36,8 @@ font pango: Inconsolata 0px
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec rxvt-unicode
-bindsym $mod+Shift+Return exec rxvt-unicode -name floating
+bindsym $mod+Return exec uxterm
+bindsym $mod+Shift+Return exec uxterm -tn floating 
 
 
 #floating_minimum_size 800 x 500
@@ -109,6 +109,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# center floating window
+bindsym $mod+Shift+c move position center 
+
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -120,16 +123,16 @@ exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec tint2
 
 #Workspace Names
-set $workspace1 ""
-set $workspace2 ""
-set $workspace3 ""
+set $workspace1 "爵"
+set $workspace2 ""
+set $workspace3 "ﲾ"
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
-set $workspace8 ""
+set $workspace8 ""
 set $workspace9 "9"
-set $workspace0 "0"
+set $workspace0 "阮"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1 
@@ -155,7 +158,7 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace0 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Ctrl+r restart
 # exit i3 (logs you out of your X session)
@@ -165,7 +168,7 @@ bindsym $mod+Ctrl+r restart
 bindsym $mod+f exec firefox
 
 # run firefox & search
-bindsym $mod+Shift+f exec firefox --new-tab "testing"
+# bindsym $mod+Shift+f exec firefox --new-tab "testing"
 
 # change screen config 
 bindsym $mod+Ctrl+f exec switch.py 
@@ -197,8 +200,8 @@ mode "resize" {
         bindsym Shift+Up resize shrink height $resizepx or $resizeppt
         bindsym Shift+Right resize grow width $resizepx or $resizeppt
 
-        bindsym minus resize shrink width 125 px; move right 64 px; resize shrink height 125 px; move down 64 px;
-        bindsym equal resize grow width 125 px; move left 64 px; resize grow height 125 px; move up 64 px;
+        bindsym minus resize shrink width 222 px; move right 113 px; resize shrink height 222 px; move down 64 px;
+        bindsym equal resize grow width 222 px; move left 113 px; resize grow height 125 px; move up 64 px;
 
 
         #bindsym Shift+minus resize shrink width 90 px; move right 45 px
@@ -272,7 +275,7 @@ bindsym $mod+Shift+r exec rxvt-unicode -name floating -e ranger
 # Volume Control
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-bindsym XF86AudioMute exec amixer set Master 0% 
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
 
 # Backlight
@@ -291,7 +294,7 @@ bindsym XF86AudioPrev exec playerctl --player=spotify previous
 
 
 # Open Config
-bindsym $mod+c exec rxvt-unicode -e vim ~/.config/i3/config
+bindsym $mod+c exec uxterm -e vim ~/.config/i3/config
 
 
 #Floating Windows
@@ -305,7 +308,9 @@ bindsym $mod+c exec rxvt-unicode -e vim ~/.config/i3/config
 #for_window [class="(?i)XTerm"] floating enable
 #for_window [class="(?i)Gnome-terminal"] floating enabled
 for_window [instance="floating"] floating enable 
+for_window [class="floating"] floating enable
 for_window [class="(?i)surf"] floating enable
+for_window [title="(?i)Discord Updater"] floating enable
 ## for_window [class="feh"] floating enable
 
 # window colors
@@ -348,7 +353,7 @@ set $bar_bg #1c1c1c
 #Screenshot
 bindsym --release Print exec xfce4-screenshooter -c -r 
 #Wallpaper
-exec feh --bg-fill ~/Pictures/wallpaper2.jpg
+exec feh --bg-fill ~/Pictures/wallpaper.png
 
 exec  nm-applet
 exec xfce4-clipman
