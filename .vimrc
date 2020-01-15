@@ -54,7 +54,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
-set number relativenumber
+" set number relativenumber
 syntax on
 set ruler
 set textwidth=79

@@ -4,11 +4,12 @@ rofi.padding: 4
 rofi.separator-style: none
 rofi.hide-scrollbar: true
 rofi.width: 30  
-rofi.show-match: true 
-rofi.color-window: #18181800, #18181800, #1e2529
-rofi.color-normal: #18181800, #ededed, #18181800, #423e3d, #ffffff00
-rofi.color-active: #18181800, #80cbc4, #18181800, #394249, #80cbc4
-rofi.color-urgent: #18181800, #ff1844, #18181800, #394249, #ff1844
-rofi.font: inconsolata bold 10
-rofi.location: 6 
-rofi.xoffset: -60
+rofi.show-match: false 
+rofi.color-window: #16161600, #16161600, #16161600
+rofi.color-normal: #16161600, #ededed, #16161600, #423e3d, #ffffff00
+rofi.color-active: #16161600, #80cbc4, #16161600, #394249, #80cbc4
+rofi.color-urgent: #16161600, #ff1844, #16161600, #394249, #ff1844
+rofi.font: inconsolata bold 11
+rofi.location: 2
+rofi.xoffset: 100
+rofi.yoffset: 1
