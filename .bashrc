@@ -2,12 +2,8 @@
 # ~/.bashrc
 #
 
-
-
-# add scripts to path
-PATH="$PATH:/home/nick/scripts:/home/nick/.cargo/bin";export PATH
-
 [[ $- != *i* ]] && return
+
 colors() {
 	local fgc bgc vals seq0
 
@@ -83,8 +79,6 @@ if ${use_color} ; then
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
 	alias fgrep='fgrep --colour=auto'
-  alias dw="python ~/scripts/download.py"
-
 else
 	if [[ ${EUID} == 0 ]] ; then
 		# show root@ when we don't have colors
@@ -94,32 +88,20 @@ else
 	fi
 fi
 
-source /usr/share/fonts/i_material.sh
-
-# terminal prompt
-echo "$i_mdi_crown" $(chance.py) 
-echo
-
-
-PS1='\[$(tput bold)\033[31m$i_mdi_fire \w \[\033\]\][0m\$ '
-# PS1='$i_mdi_crown'
+PS1='[\A]\[\033[31m\]\n \w >\[$(tput sgr0)\] '
 
 unset use_color safe_term match_lhs sh
 
-# custom aliases
-
-
 # confirm before overwriting something
-alias cp="cp -i" 
-
+alias cp="cp -i"  
 # human-readable sizes
 alias df='df -h'                          
 
 # show sizes in MB
 alias free='free -m'                      
+
 alias np='nano -w PKGBUILD'
 
-# more is less!
 alias more=less
 
 # better ls
@@ -173,13 +155,4 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-
-# better yaourt colors
-export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
-
-
-# starship bash
-# yay -S starship
-# eval "$(starship init bash)"
-
-# export BROWSER=/usr/lib/firefox
+source /usr/share/nvm/init-nvm.sh
